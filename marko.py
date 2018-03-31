@@ -7,6 +7,7 @@ import sys
 
 wordlist = {}
 
+
 def build_markov_chain(word):
     sys.stdout.write(word + ' ')
     word = word.lower()
@@ -16,6 +17,7 @@ def build_markov_chain(word):
     else:
         print()
 
+
 if len(sys.argv) == 1:
     if os.path.isfile('training_data.txt'):
         filename = 'training_data.txt'
@@ -23,8 +25,8 @@ if len(sys.argv) == 1:
         print('Error: No training data found!')
         sys.exit()
 else:
-     filename = sys.argv[1]   
-        
+    filename = sys.argv[1]
+
 # read in file and format it
 buffer = ''
 with open(filename) as file:
@@ -48,7 +50,7 @@ for i, word in enumerate(words):
             wordlist[word] = [words[i + 1]]
         else:
             wordlist[word] += [words[i + 1]]
-    except:
+    except BaseException:
         pass
 
 build_markov_chain(random.choice(list(wordlist.keys())).title())
